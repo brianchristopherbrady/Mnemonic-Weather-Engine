@@ -10,10 +10,6 @@ The main demo view combines a prompt panel, generation modes, live metrics, and 
 
 ![Mnemonic Weather Engine overview](assets/screenshots/overview.png)
 
-After a local remix or generated run, the canvas updates with a new semantic weather field and status readout.
-
-![Generated semantic weather map](assets/screenshots/generated-map.png)
-
 ## Core Concept
 
 Most text tools make ideas flatter: bullets, outlines, summaries, and lists. Mnemonic Weather Engine goes the other direction. It asks what an idea would feel like if it had weather.
