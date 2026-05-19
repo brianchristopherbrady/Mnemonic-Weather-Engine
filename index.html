@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mnemonic Weather Engine</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.164.1/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.164.1/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main id="app">
+      <canvas id="weather-canvas" aria-label="Interactive semantic weather map"></canvas>
+
+      <section class="status-bar" aria-label="Demo status">
+        <div>
+          <p class="kicker">AI art demo</p>
+          <h1>Mnemonic Weather Engine</h1>
+          <p id="status-line">Demo map ready. Add an AI key when you want live generation.</p>
+        </div>
+        <div class="metrics" aria-label="Map metrics">
+          <span><b id="concept-count">0</b> concepts</span>
+          <span><b id="link-count">0</b> links</span>
+          <span><b id="tension-count">0</b> tensions</span>
+        </div>
+      </section>
+
+      <section class="demo-panel" aria-label="Demo controls">
+        <div class="panel-header">
+          <div>
+            <p class="kicker">1. Describe something</p>
+            <h2>Turn an idea into weather</h2>
+          </div>
+        </div>
+
+        <details id="settings-details" class="settings-details">
+          <summary>AI key settings <span id="key-state">No key saved</span></summary>
+          <form id="settings-form" class="settings" aria-label="AI settings">
+            <label>API key<input id="api-key" type="password" autocomplete="off" placeholder="sk-..." /></label>
+            <label>Base URL<input id="base-url" type="url" value="https://api.openai.com/v1" /></label>
+            <label>Model<input id="model-name" type="text" value="gpt-4o-mini" /></label>
+            <button id="save-settings" class="secondary-btn" type="submit">Save locally</button>
+            <p id="settings-status" class="settings-status" role="status">No key saved yet. Generate will use the demo remix.</p>
+            <p>For this local demo only. Production should use a server proxy.</p>
+          </form>
+        </details>
+
+        <textarea id="seed-input" rows="4" spellcheck="true">A city where every forgotten idea becomes weather, and people navigate by emotional pressure.</textarea>
+
+        <div class="mode-row" role="group" aria-label="Generation mode">
+          <button class="mode is-active" type="button" data-mode="map">Map</button>
+          <button class="mode" type="button" data-mode="tensions">Tensions</button>
+          <button class="mode" type="button" data-mode="ritual">Ritual</button>
+          <button class="mode" type="button" data-mode="strategy">Strategy</button>
+        </div>
+
+        <div class="actions">
+          <button id="generate-btn" class="primary-btn" type="button">Generate weather</button>
+          <button id="demo-btn" class="secondary-btn" type="button">Remix demo</button>
+        </div>
+
+        <p id="run-status" class="run-status" role="status">Ready. Generate uses AI when a key is saved; Remix always works locally.</p>
+
+        <div class="export-row" aria-label="Export tools">
+          <button id="export-btn" class="utility-btn" type="button">Export JSON</button>
+          <button id="capture-btn" class="utility-btn" type="button">Capture PNG</button>
+        </div>
+
+      </section>
+
+      <aside class="inspector" aria-label="Selected concept">
+        <p class="kicker">2. Inspect the scene</p>
+        <h2 id="detail-title">Hover a glowing concept</h2>
+        <p id="detail-body">Drag to orbit, scroll to zoom, and click a concept to focus it.</p>
+        <div id="tag-row" class="tag-row"></div>
+      </aside>
+
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    </main>
+    <script src="./src/local-config.js"></script>
+    <script type="module" src="./src/main.js"></script>
+    <script src="./src/fallback.js"></script>
+  </body>
+</html>
